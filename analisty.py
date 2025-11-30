@@ -41,7 +41,7 @@ class Analista():
 
         try:
             resposta = self.model.generate_content(prompt)
-            text_limpo = resposta.replace("'''json",'')
+            text_limpo = resposta.text.replace("```json", "").replace("```", "").strip()
             resultado = json.loads(text_limpo)
             return resultado
         except Exception as e:
