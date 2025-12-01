@@ -21,8 +21,38 @@ if st.button('Analisar compatibilidade'):
                 agente = Analista() 
                 resposta = agente.analisar(vaga, curriculo)
                 
-                st.divider()
-                st.write(resposta) 
+                st.snow() 
+                score = resposta.get("match_score", 0)
                 
+          
+                kpi1, kpi2 = st.columns([1, 3])
+                with kpi1:
+                    st.metric(label="Compatibilidade", value=f"{score}%")
+                with kpi2:
+                    st.write("Nível de Aderência à Vaga:")
+                    st.progress(score)
+
+                st.divider()
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.success("✅ Pontos Fortes")
+                    for ponto in resposta.get("pontos_fortes", []):
+                        st.write(f"• {ponto}")
+                
+                with col2:
+                    st.error("⚠️ Pontos de Atenção")
+                    for ponto in resposta.get("pontos_fracos", []):
+                        st.write(f"• {ponto}")
+
+                st.divider()
+        
+                st.subheader("💡 Conclusão do Recrutador")
+                st.info(resposta.get("conclusao_executiva", "Sem conclusão."))
+            
+                if "planejamento_futuro" in resposta:
+                    with st.expander("🚀 Ver Plano de Estudos Recomendado"):
+                        st.write(resposta["planejamento_futuro"])
+            
             except Exception as e:
-                st.error(f"Erro no sistema: {e}")
+                print(f'Deu bom não por esse erro aqui: {e}')
