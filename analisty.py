@@ -13,7 +13,7 @@ class Analista():
         self.model = genai.GenerativeModel('gemini-2.0-flash')
     
 
-    def analisar(self,vaga,curriculo):
+    def analisar(self,vaga,curriculo_texto):
 
         prompt = f'''
         Sua função é atuar como um Tech Recruiter Sênior e rígido.
@@ -22,7 +22,7 @@ class Analista():
         {vaga}
         
         CURRÍCULO DO CANDIDATO:
-        {curriculo}
+        {curriculo_texto}
         
           Baseados em dados reais e informações atualizada, correlacione os dois e defina o nivel de conexão entre ambos. 
 
@@ -46,7 +46,8 @@ class Analista():
             return resultado
         except Exception as e:
             print(f'Tivemos um erro cabuloso: {e}')
-        return
+            
+            return {"erro": f"Falha na análise: {e}"}
         
         
 
