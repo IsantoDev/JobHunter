@@ -32,7 +32,7 @@ class Analista():
             "match_score": (inteiro de 0 a 100),
             "pontos_fortes": ["ponto 1", "ponto 2", "ponto 3"],
             "pontos_fracos": ["ponto 1", "ponto 2", "ponto 3"],
-            "conclusao_executiva": "texto curto e direto"
+            "conclusao_executiva": "texto curto e direto",
             "planejamento_futuro": "planejamento focado e direto"
         }}
         """'''
